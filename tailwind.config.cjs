@@ -12,6 +12,7 @@ module.exports = {
         mustard_yellow: "#EAC435",
         like_blue: "#0EFBCC",
         smoky_blue: "#5982C5",
+        greenblue: "#2EA36E",
 
 
       },

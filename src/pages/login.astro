@@ -5,17 +5,17 @@ import lock_icon from "../images/lock.svg";
 ---
 
 <Layout>
-        <div class="bg-navgreen w-4/12 flex justify-center text-center">
+        <div class="bg-greenblue w-4/12 flex justify-center text-center px-[50vw] py-[9vw]">
             <form action="">
                 <h1 class="text-3xl font-semibold underline"> Login </h1>
                 
                 <div class="input-box my-2">
                     <img src={user_icon.src} class="inline mx-2"/>
-                    <input class="inline mx-2 rounded-lg" type="text" placeholder="Username" required>
+                    <input class="inline mx-2 rounded-lg bg-slate-800" type="text" placeholder="Username" required>
                 </div>
                 <div class="input-box my-2">
                     <img src={lock_icon.src} class="inline mx-2"/>
-                    <input class="inline mx-2 rounded-lg" type="password" placeholder="Password" required>
+                    <input class="inline mx-2 rounded-lg bg-slate-800" type="password" placeholder="Password" required>
                 </div>
 
                 <br>
@@ -23,11 +23,12 @@ import lock_icon from "../images/lock.svg";
                 <div class="flex justify-start">
                     <div>
                         <label><input type="radio"> Personal Account </label>
+                        <br>
                         <label><input type="radio"> Authorized Facility Account </label>
                     </div>
                 </div>
-
-                <button type="submit" class="btn"> Login </button>
+                <br>
+                <button type="submit" class="btn bg-amber-700 rounded-lg"> Login </button>
 
                 <div class="register-link">
                     <p> Don't have an account? <a href="#"> <b> Register </b> </a></p>
