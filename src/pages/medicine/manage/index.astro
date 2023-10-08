@@ -1,0 +1,106 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import searchIcon from "../../../images/search.svg";
+import medjarIcon from "../../../images/medjar.png";
+import { fade } from "astro:transitions";
+
+let medications = [];
+if (Astro.cookies.has("jwt")) {
+  const query = await fetch(`https://medsupply.fly.dev/api/medicine/org`, {
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${Astro.cookies.get("jwt")?.value}`,
+    },
+    method: "GET",
+  }).then((d) => d.json());
+  medications = query.data.filter((n) => n);
+}
+---
+
+<Layout>
+  <br />
+  <div class="flex justify-center">
+    <h1 class="font-bold text-3xl text-white">
+      Organization Medicine Managment Page
+    </h1>
+  </div>
+  <br /><br />
+  <div class="flex justify-center w-full">
+    <form id="form">
+      <div
+        class="bg-navgreen px-6 py-6 rounded"
+        id="results"
+        hidden={medications.length < 1}
+      >
+        <h1 class="text-xl text-gray-950 font-bold underline">
+          Showing organization medicine:
+        </h1>
+
+        {
+          medications.map((e: any) => (
+            <div class="rounded bg-white px-8 py-6 my-4 mx-2 flex">
+              <div class="justify-start">
+                <img src={medjarIcon.src} />
+              </div>
+              <div class="mx-8 justify-start">
+                <>
+                  <p class="inline">
+                    <h2 class="text-xl text-gray-950 font-semibold underline inline">
+                      {e.name}
+                    </h2>
+                    ,{" "}
+                    <a
+                      href={`/search?f=${e.from}&q=*`}
+                      class="underline text-indigo-600 hover:text-indigo-900"
+                    >
+                      {e.from_name.toUpperCase()}
+                    </a>
+                  </p>
+                  <br />
+                </>
+                <p>{e.desc}</p>
+                <p>
+                  <strong class="underline">Required</strong>:{" "}
+                  {e.storage_conditions}
+                </p>
+                <p class="font-semibold text-red-900">
+                  {new Date(e.expire).toLocaleString("el-GR", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              </div>
+              <div class="flex justify-end ml-64">
+                <button
+                  class="rounded bg-red-500 px-4 py-2 font-semibold mx-2 disabled:bg-gray-700  disabled:text-gray-300 text-white collected-deny"
+                  value={e.id}
+                  disabled={e.requested == false}
+                >
+                  Cancel
+                </button>
+                <button
+                  class="rounded bg-green-500 px-4 py-2 font-semibold mx-2 disabled:bg-gray-700  disabled:text-gray-300 text-white collected-confirm"
+                  value={e.id}
+                  disabled={e.requested == false}
+                >
+                  Confirm Collection
+                </button>
+                <button
+                  class="rounded bg-red-500 px-4 py-2 font-semibold mx-2 disabled:bg-gray-700  disabled:text-gray-300 text-white collected-deny"
+                  value={e.id}
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </form>
+  </div>
+  <br /><br />
+</Layout>
+
+<script></script>

@@ -1,0 +1,186 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import searchIcon from "../../images/search.svg";
+import medjarIcon from "../../images/medjar.png";
+
+let medications = [];
+if (Astro.cookies.has("jwt")) {
+  if (Astro.url.searchParams.has("q")) {
+    if (Astro.url.searchParams.get("q") != "*") {
+      const query = await fetch(
+        `https://medsupply.fly.dev/api/medicine?q=${Astro.url.searchParams.get(
+          "q"
+        )}${
+          Astro.url.searchParams.has("f")
+            ? "&f=" + Astro.url.searchParams.get("f")
+            : ""
+        }`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${Astro.cookies.get("jwt")?.value}`,
+          },
+          method: "GET",
+        }
+      ).then((d) => d.json());
+      medications = query.data.filter((n) => n);
+    } else {
+      const query = await fetch(
+        `https://medsupply.fly.dev/api/medicine/all?${
+          Astro.url.searchParams.has("f")
+            ? "f=" + Astro.url.searchParams.get("f")
+            : ""
+        }`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${Astro.cookies.get("jwt")?.value}`,
+          },
+          method: "GET",
+        }
+      ).then((d) => d.json());
+      medications = query.data.filter((n) => n);
+    }
+  }
+}
+---
+
+<Layout>
+  <div class="flex justify-center w-full">
+    <form id="form">
+      <div class="my-12 px-2 py-6 rounded-md bg-darkbackground">
+        <div class="inline-block">
+          <button type="submit"
+            ><img class="mx-2 my-2 w-12" src={searchIcon.src} /></button
+          >
+        </div>
+        <div class="inline-block">
+          <input
+            class="mx-2 w-[40vw] rounded"
+            type="text"
+            placeholder="Search our medicine collection..."
+            id="form-condition"
+            value={Astro.url.searchParams.has("q")
+              ? decodeURIComponent(Astro.url.searchParams.get("q") || "")
+              : ""}
+          />
+          <br />
+          <span class="mx-2 text-sm text-gray-800"
+            >Powered using the almighty search feature of supabase.</span
+          >
+        </div>
+      </div>
+
+      <div
+        class="bg-navgreen px-6 py-6 rounded"
+        id="results"
+        hidden={medications.length < 1}
+      >
+        <h1 class="text-xl text-gray-950 font-bold underline">
+          Showing medicine results for the condition:
+        </h1>
+
+        {
+          medications.map((e: any) => (
+            <div class="rounded bg-white px-8 py-6 my-4 mx-2 flex">
+              <div class="justify-start">
+                <img src={medjarIcon.src} />
+              </div>
+              <div class="mx-8 justify-start">
+                <>
+                  <p class="inline">
+                    <h2 class="text-xl text-gray-950 font-semibold underline inline">
+                      {e.name}
+                    </h2>
+                    ,{" "}
+                    <a
+                      href={`/search?f=${e.from}&q=*`}
+                      class="underline text-indigo-600 hover:text-indigo-900"
+                    >
+                      {e.from_name.toUpperCase()}
+                    </a>
+                  </p>
+                  <br />
+                </>
+                <p>{e.desc}</p>
+                <p>
+                  <strong class="underline">Required</strong>:{" "}
+                  {e.storage_conditions}
+                </p>
+                <p class="font-semibold text-red-900">
+                  {new Date(e.expire).toLocaleString("el-GR", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              </div>
+              <div class="flex justify-end ml-64">
+                <div>
+                  <button
+                    class="rounded bg-greenbtn px-4 py-2 font-semibold h-full btn"
+                    value={e.id}
+                  >
+                    Request Medicine
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </form>
+  </div>
+  <br /><br />
+</Layout>
+
+<script>
+  const form = document.getElementById("form") as HTMLFormElement;
+  const formCondition = document.getElementById(
+    "form-condition"
+  ) as HTMLInputElement;
+
+  function getCookie(name: string) {
+    var match = document.cookie.match(
+      RegExp("(?:^|;\\s*)" + name + "=([^;]*)")
+    );
+    return match ? match[1] : null;
+  }
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (formCondition && formCondition.value) {
+      location.search = `?q=${encodeURIComponent(formCondition.value)}`;
+    }
+  });
+
+  const request = async (id: string) => {
+    const query = await fetch(
+      "https://medsupply.fly.dev/api/medicine/request",
+      {
+        body: JSON.stringify({ mid: id }),
+        headers: {
+          Authorization: `Bearer ${getCookie("jwt")}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      }
+    ).then((d) => d.json());
+
+    alert("Medicine Requested!");
+    window.location.reload();
+  };
+
+  // @ts-check
+  const reqs = document.querySelectorAll(".btn");
+  reqs.forEach((e) =>
+    e.addEventListener("click", async (q) => {
+      q.preventDefault();
+
+      // @ts-ignore
+      await request(e.value);
+    })
+  );
+</script>
