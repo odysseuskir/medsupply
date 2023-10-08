@@ -3,7 +3,10 @@ import Layout from "../../layouts/Layout.astro";
 import searchIcon from "../../images/search.svg";
 
 let medications = [];
-if (Astro.url.searchParams.has("data")) {
+if (
+  Astro.url.searchParams.has("data") &&
+  atob(Astro.url.searchParams.get("data") || "") != "undefined"
+) {
   medications = JSON.parse(atob(Astro.url.searchParams.get("data") || ""));
 }
 ---

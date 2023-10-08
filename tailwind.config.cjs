@@ -10,6 +10,7 @@ module.exports = {
         navgreen: "#41E296",
         background: "#177F3F",
         darkbackground: "#86AC86",
+        greenbtn: "#52FF00",
       },
     },
   },
