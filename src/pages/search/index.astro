@@ -23,7 +23,7 @@ if (Astro.cookies.has("jwt")) {
           method: "GET",
         }
       ).then((d) => d.json());
-      medications = query.data.filter((n) => n);
+      medications = query.data.filter((n: any) => n);
     } else {
       const query = await fetch(
         `https://medsupply.fly.dev/api/medicine/all?${
@@ -39,7 +39,7 @@ if (Astro.cookies.has("jwt")) {
           method: "GET",
         }
       ).then((d) => d.json());
-      medications = query.data.filter((n) => n);
+      medications = query.data.filter((n: any) => n);
     }
   }
 }
