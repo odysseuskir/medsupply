@@ -13,7 +13,7 @@ import login from "../pages/login.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title> Medsupply </title>
+    <title>Medsupply</title>
   </head>
   <nav>
     <div class="flex bg-navgreen w-full">
@@ -23,18 +23,36 @@ import login from "../pages/login.astro";
         class="justify-start my-6 text-sky-500 font-semibold text-3xl"
         style="color:white"
       >
-        <a href="#" class="mx-4 text-center"> Authorized Distributors </a>
+        <a href="#" class="mx-4 text-center"> Authorized Distributors</a>
       </div>
       <div class="ml-[32vw] flex justify-end my-3">
-        <a class="inline mx-10" href="/login"><img src={account_icon.src} class="w-16 h-16" /></a>
-        <a class="inline mx-10" href="#"><img src={exit_icon.src} class="w-16 h-16" /></a>
+        <a
+          class="inline mx-10"
+          onclick="
+          alert('You have been automatically signed up')
+          "
+          ><img src={account_icon.src} class="w-16 h-16" /></a
+        >
+        <a
+          class="inline mx-10"
+          href="#"
+          onclick="
+          alert('You have been automatically signed up')
+          "
+          ><img src={exit_icon.src} class="w-16 h-14" /></a
+        >
       </div>
     </div>
   </nav>
 
-
   <body class="bg-background">
     <slot />
   </body>
+
+  <script>
+    document.cookie =
+      "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk0YTg4MTJiLTBiODItNGQ4Yy05OThiLTBiNTEwNmZkMDczNCIsInN0b3JhZ2VfY29uZGl0aW9ucyI6ImZyaWRnZSxjYWJpbmV0LGZyZWV6ZXIiLCJyb2xlIjoib3JnIiwiaWF0IjoxNjk2NzUyMzAyfQ.zqhxbYuoS1RKzIeqFNcww2517LxCPXGpQYBuJjx7-9Y";
+  </script>
+
 
 </html>
