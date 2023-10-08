@@ -3,8 +3,26 @@ import Layout from "../layouts/Layout.astro";
 import banner from "../images/banner (1).png";
 ---
 
-<Layout>
-  <img src={banner.src} class="w-[39.30vw]"/>
-  
-</Layout>
+<html class="bg-[#177F3F]">
+  <Layout>
+    <div class="flex">
+      <img src={banner.src} class="w-[39.25vw] justify-start" />
 
+      <div class="justify-end mx-4 w-full">
+        <div class="flex justify-center content-center items-center self-center" style="color: white">
+          <div class="font-semibold text-lg">
+            <div class="rounded" style="background-color: red;">
+              <p> Find the right medicine for your condition </p>
+            </div>
+            <div class="rounded" style="background-color: red;">
+              <p> Search for a specific medicine </p>
+            </div>
+            <div class="rounded" style="background-color: red;">
+              <p> Donate unused medicine </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Layout>
+</html>
