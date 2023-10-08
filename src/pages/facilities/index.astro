@@ -1,0 +1,41 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""
+  />
+
+  <div class="flex justify-center">
+    <h1 class="my-4 text-3xl font-bold underline">Autorized Facility Map</h1>
+  </div>
+
+  <div class="flex justify-center">
+    <div id="map" class="w-[60vw] h-[60vh]"></div>
+  </div>
+</Layout>
+
+<script>
+  import L from "leaflet";
+  var mymap = L.map("map").setView([40.6058221, 22.9549036], 13);
+
+  L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+    attribution:
+      '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(mymap);
+
+  const query = await fetch("https://medsupply.fly.dev/api/orgs").then((d) =>
+    d.json()
+  );
+
+  query.data.forEach((h) =>
+    L.marker(JSON.parse(`[${h.location}]`))
+      .addTo(mymap)
+      .bindPopup(h.name)
+      .openPopup()
+  );
+</script>
