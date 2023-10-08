@@ -2,7 +2,6 @@
 import Layout from "../../../layouts/Layout.astro";
 import searchIcon from "../../../images/search.svg";
 import medjarIcon from "../../../images/medjar.png";
-import { fade } from "astro:transitions";
 
 let medications = [];
 if (Astro.cookies.has("jwt")) {
@@ -13,7 +12,7 @@ if (Astro.cookies.has("jwt")) {
     },
     method: "GET",
   }).then((d) => d.json());
-  medications = query.data.filter((n) => n);
+  medications = query.data.filter((n: any) => n);
 }
 ---
 
