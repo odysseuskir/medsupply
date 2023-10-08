@@ -1,6 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import banner from "../images/banner (1).png";
+import add_medicines from "../images/Icon.png";
+import search from "../images/icon_(2).png";
+import donate from "../images/icon_(3).png";
 ---
 
 <html class="bg-[#177F3F]">
@@ -11,16 +14,23 @@ import banner from "../images/banner (1).png";
       <div class="justify-end mx-4 w-full">
         <div class="flex justify-center content-center items-center self-center" style="color: white">
           <div class="font-semibold text-lg">
-            <div class="rounded" style="background-color: red;">
-              <p> Find the right medicine for your condition </p>
+
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-mustard_yellow">
+              <img src={add_medicines.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/ai/">Find the right medicine for your condition </a></div>
             </div>
-            <div class="rounded" style="background-color: red;">
-              <p> Search for a specific medicine </p>
+              
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-like_blue">
+              <img src={search.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/search?q=*"> Search for a specific medicine </a></div>
             </div>
-            <div class="rounded" style="background-color: red;">
-              <p> Donate unused medicine </p>
+
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-smoky_blue">
+              <img src={donate.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/donate/unused"> Donate unused medicine </a></div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
