@@ -3,34 +3,36 @@ import Layout from "../layouts/Layout.astro";
 import user_icon from "../images/user.svg";
 import lock_icon from "../images/lock.svg";
 ---
-<htlm class="justify-center">
-    <Layout>
-        
-        <div class="wrapper bg-yellow-600 text-center justify-items-center">
+
+<Layout>
+        <div class="bg-navgreen w-4/12 flex justify-center text-center">
             <form action="">
-                <h1> Login </h1>
-                <div class="input-box">
-                    <img src={user_icon.src} class="px-[42vw]"/>
-                    <input type="text" placeholder="Username" required>
+                <h1 class="text-3xl font-semibold underline"> Login </h1>
+                
+                <div class="input-box my-2">
+                    <img src={user_icon.src} class="inline mx-2"/>
+                    <input class="inline mx-2 rounded-lg" type="text" placeholder="Username" required>
                 </div>
-                <div class="input-box">
-                    <img src={lock_icon.src} class="px-[42vw]"/>
-                    <input type="password" placeholder="Password" required>
+                <div class="input-box my-2">
+                    <img src={lock_icon.src} class="inline mx-2"/>
+                    <input class="inline mx-2 rounded-lg" type="password" placeholder="Password" required>
                 </div>
 
-                <div class="remember-forgot">
-                    <label><input type="checkbox"> Personal Account </label>
-                    <br>
-                    <label><input type="checkbox"> Authorized Facility Account </label>
+                <br>
+                
+                <div class="flex justify-start">
+                    <div>
+                        <label><input type="radio"> Personal Account </label>
+                        <label><input type="radio"> Authorized Facility Account </label>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn"> Login </button>
 
                 <div class="register-link">
-                    <p> Don't have an account? <a href="#"> Register </a></p>
+                    <p> Don't have an account? <a href="#"> <b> Register </b> </a></p>
                 </div>
                 </form>
             </div>
-
-    </Layout>
-</htlm>
+        </div>
+</Layout>

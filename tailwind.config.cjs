@@ -13,6 +13,7 @@ module.exports = {
         like_blue: "#0EFBCC",
         smoky_blue: "#5982C5",
 
+
       },
     },
   },
