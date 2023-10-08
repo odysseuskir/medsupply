@@ -5,7 +5,7 @@ import exit_icon from "../images/Vector.png";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-background">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -17,6 +17,7 @@ import exit_icon from "../images/Vector.png";
   <nav>
     <div class="flex bg-navgreen">
       <img src={logo.src} class="w-3/12" />
+
       <div
         class="justify-start my-6 text-sky-500 font-semibold text-3xl"
         style="color:white"
@@ -35,4 +36,5 @@ import exit_icon from "../images/Vector.png";
   <body class="bg-background">
     <slot />
   </body>
+
 </html>
