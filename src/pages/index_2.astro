@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import banner from "../images/banner (1).png";
+import add from "../images/icon_(4).png";
+import list from "../images/icon_(5).png";
+import history from "../images/icon_(6).png";
+---
+
+<html class="bg-[#177F3F]">
+  <Layout>
+    <div class="flex">
+      <img src={banner.src} class="w-[39.25vw] justify-start" />
+
+      <div class="justify-end mx-4 w-full">
+        <div class="flex justify-center content-center items-center self-center" style="color: white">
+          <div class="font-semibold text-lg">
+
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-mustard_yellow">
+              <img src={add.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/medicine/new"> List new medicine </a></div>
+            </div>
+              
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-like_blue">
+              <img src={list.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/medicine/manage"> Pending requests </a></div>
+            </div>
+
+            <div class="flex rounded-lg py-10 text-center my-12 w-[48vw] bg-smoky_blue">
+              <img src={history.src} class="pl-4 justify-start w-[5vw] inline" />
+              <div class="justify-center w-[43vw] items-center text-2xl font-bold mt-3"><a class="justify-center inline" href="/medicine/magage"> Manage Requests </a></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </Layout>
+</html>

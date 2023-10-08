@@ -1,0 +1,36 @@
+---
+import Layout from "../layouts/Layout.astro";
+import user_icon from "../images/user.svg";
+import lock_icon from "../images/lock.svg";
+---
+<htlm class="justify-center">
+    <Layout>
+        
+        <div class="wrapper bg-yellow-600 text-center justify-items-center">
+            <form action="">
+                <h1> Login </h1>
+                <div class="input-box">
+                    <img src={user_icon.src} class="px-[42vw]"/>
+                    <input type="text" placeholder="Username" required>
+                </div>
+                <div class="input-box">
+                    <img src={lock_icon.src} class="px-[42vw]"/>
+                    <input type="password" placeholder="Password" required>
+                </div>
+
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> Personal Account </label>
+                    <br>
+                    <label><input type="checkbox"> Authorized Facility Account </label>
+                </div>
+
+                <button type="submit" class="btn"> Login </button>
+
+                <div class="register-link">
+                    <p> Don't have an account? <a href="#"> Register </a></p>
+                </div>
+                </form>
+            </div>
+
+    </Layout>
+</htlm>
